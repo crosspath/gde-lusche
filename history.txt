@@ -1,0 +1,3 @@
+rails g scaffold Address name type:integer parent:references
+rails g scaffold House name address:references
+rails g model FtsAddress name
