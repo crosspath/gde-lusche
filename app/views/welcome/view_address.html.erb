@@ -1,0 +1,26 @@
+<p><%= link_to 'Home', root_path %></p>
+
+<h2><%= @house.address.fullname %>, <%= @house.name %></h2>
+
+<h3>Form</h3>
+<%= form_tag('', onsubmit: 'return check_form(this)', remote: true) do %>
+  <p><%= label_tag :name, 'Имя' %> <%= text_field_tag :name %></p>
+  <p><%= label_tag :flat, 'Номер квартиры' %> <%= text_field_tag :flat %></p>
+  <p><%= label_tag :phone, 'Телефон' %> <%= text_field_tag :phone %></p>
+  <p><%= submit_tag 'Отправить' %></p>
+  <%= javascript_tag do %>
+    function check_form(f)
+    {
+      if (f.name.value && f.flat.value && f.phone.value && f.phone.value.replace(/\D/g, '').match(/(7|8)\d{10}/))
+      {
+        alert('Спасибо за заявку, наш менеджер свяжется с Вами в течении получаса');
+        return true;
+      }
+      else
+      {
+        alert('omg');
+        return false;
+      }
+    }
+  <% end %>
+<% end %>

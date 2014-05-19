@@ -1,0 +1,33 @@
+<%= form_tag(view_address_path, method: 'get') do %>
+  <%= hidden_field_tag :address_id %>
+  <%= hidden_field_tag :house_id %>
+  <%= text_field_tag :address, nil, placeholder: 'Адрес' %>
+  <%= text_field_tag :house, nil, placeholder: 'Дом' %>
+  <%= submit_tag 'Найти' %>
+  <%= javascript_tag do %>
+    $('#address').autocomplete({
+      source: '<%= search_address_path %>',
+      select: function(e, ui)
+        {
+          $('#address_id').val(ui.item.value);
+          $('#house').focus();
+          window.setTimeout(function() { $('#address').val(ui.item.label); }, 100);
+        },
+      width: '120px'
+    });
+    $('#house').autocomplete({
+      source: function(request, response)
+        {
+          var term = request.term;
+          $.getJSON('<%= search_house_path %>', {address: $('#address_id').val(), term: term})
+            .done(function(json) { response(json); });
+        },
+      select: function(e, ui)
+        {
+          $('#house_id').val(ui.item.value);
+          window.setTimeout(function() { $('#house').val(ui.item.label); }, 100);
+        },
+      width: '120px'
+    });
+  <% end %>
+<% end %>

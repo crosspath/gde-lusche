@@ -41,4 +41,4 @@ gem 'spring',        group: :development
 
 gem 'ffaker'
 gem 'bootstrap-sass'
-gem 'select2-rails'
+gem 'jquery-ui-rails'

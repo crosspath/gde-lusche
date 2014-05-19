@@ -13,6 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require select2
-//= require select2_locale_ru
+//= require jquery.ui.autocomplete
 //= require_tree .
